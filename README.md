@@ -53,6 +53,21 @@ FAQ(
     ),
 ```
 
+For giving color and borderRadius
+
+```dart
+FAQ(
+    question: "Question",
+    answer: data,
+    ansDecoration: BoxDecoration(
+        color: Colors.grey[550],
+        borderRadius: const BorderRadius.all(Radius.circular(20))),
+    queDecoration: BoxDecoration(
+        color: Colors.grey[500],
+        borderRadius: const BorderRadius.all(Radius.circular(20))),
+    ),
+```
+
 For giving padding in answer
 
 ```dart

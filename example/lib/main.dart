@@ -29,52 +29,64 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(children: [
-          FAQ(question: "Question 1", answer: data),
-          FAQ(question: "Question2", answer: data),
-          FAQ(
-            question: "Question 3",
-            answer: data,
-            ansStyle: const TextStyle(color: Colors.blue, fontSize: 15),
-            queStyle: const TextStyle(color: Colors.green, fontSize: 35),
-          ),
-          FAQ(
-            question: "Question 4",
-            answer: data,
-            showDivider: false,
-          ),
-          FAQ(
-            question: "Question 5",
-            answer: data,
-            expandedIcon: const Icon(Icons.minimize),
-            collapsedIcon: const Icon(Icons.add),
-            showDivider: false,
-            ansStyle: const TextStyle(color: Colors.blue, fontSize: 15),
-            ansPadding: const EdgeInsets.all(50),
-          ),
-          FAQ(
-            question: "Question 5",
-            answer: data,
-            expandedIcon: const Icon(Icons.minimize),
-            collapsedIcon: const Icon(Icons.add),
-            ansStyle: const TextStyle(color: Colors.blue, fontSize: 15),
-            ansPadding: const EdgeInsets.all(50),
-            separator: Container(
-              height: 5,
-              width: double.infinity,
-              color: Colors.purple,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(children: [
+            FAQ(
+              question: "Question 1",
+              answer: data,
+              ansDecoration: BoxDecoration(
+                  color: Colors.grey[550],
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
+              queDecoration: BoxDecoration(
+                  color: Colors.grey[500],
+                  borderRadius: const BorderRadius.all(Radius.circular(20))),
             ),
-          ),
-          FAQ(
-            question: "Question 5",
-            answer: data,
-            expandedIcon: const Icon(Icons.minimize),
-            collapsedIcon: const Icon(Icons.add),
-            showDivider: false,
-            ansStyle: const TextStyle(color: Colors.blue, fontSize: 15),
-            ansPadding: const EdgeInsets.all(50),
-          ),
-        ]),
+            FAQ(question: "Question2", answer: data),
+            FAQ(
+              question: "Question 3",
+              answer: data,
+              ansStyle: const TextStyle(color: Colors.blue, fontSize: 15),
+              queStyle: const TextStyle(color: Colors.green, fontSize: 35),
+            ),
+            FAQ(
+              question: "Question 4",
+              answer: data,
+              showDivider: false,
+            ),
+            FAQ(
+              question: "Question 5",
+              answer: data,
+              expandedIcon: const Icon(Icons.minimize),
+              collapsedIcon: const Icon(Icons.add),
+              showDivider: false,
+              ansStyle: const TextStyle(color: Colors.blue, fontSize: 15),
+              ansPadding: const EdgeInsets.all(50),
+            ),
+            FAQ(
+              question: "Question 6",
+              answer: data,
+              expandedIcon: const Icon(Icons.minimize),
+              collapsedIcon: const Icon(Icons.add),
+              ansStyle: const TextStyle(color: Colors.blue, fontSize: 15),
+              ansPadding: const EdgeInsets.all(50),
+              separator: Container(
+                height: 5,
+                width: double.infinity,
+                color: Colors.purple,
+              ),
+            ),
+            FAQ(
+              question: "Question 7",
+              answer: data,
+              expandedIcon: const Icon(Icons.minimize),
+              collapsedIcon: const Icon(Icons.add),
+              showDivider: false,
+              ansStyle: const TextStyle(color: Colors.blue, fontSize: 15),
+              ansPadding: const EdgeInsets.all(50),
+            ),
+          ]),
+        ),
       ),
     );
   }

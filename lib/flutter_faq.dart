@@ -3,17 +3,35 @@ library flutter_faq;
 import 'package:flutter/material.dart';
 
 class FAQ extends StatefulWidget {
+  // for question
   final String question;
+
+  //answer
   final String answer;
+
+  //question textstyle, defaults to EdgeInsets.symmetric(horizontal: 35.0, vertical: 10),
   final TextStyle? queStyle;
+
+  // answertextstyle, defaults to  TextStyle(color: Colors.black,fontWeight: FontWeight.w500,fontSize: 18),
   final TextStyle? ansStyle;
-  final Widget? icon;
+
+  //defaults to false
   final bool? isExpanded;
+
+  //defaults to Icon.chevron_right
   final Widget? expandedIcon;
   final Widget? collapsedIcon;
+
+  //defaults to true
   final bool showDivider;
+
+  //padding to give in answer
   final EdgeInsets? ansPadding;
+
+  //divider
   final Widget? separator;
+
+  final BoxDecoration? ansDecoration, queDecoration;
 
   const FAQ(
       {super.key,
@@ -22,12 +40,13 @@ class FAQ extends StatefulWidget {
       this.queStyle,
       this.ansStyle,
       this.isExpanded = false,
-      this.icon,
       this.expandedIcon,
       this.collapsedIcon,
       this.showDivider = true,
       this.ansPadding,
-      this.separator});
+      this.separator,
+      this.ansDecoration,
+      this.queDecoration});
 
   @override
   State<FAQ> createState() => _FAQState();
@@ -37,6 +56,16 @@ class _FAQState extends State<FAQ> {
   @override
   Widget build(BuildContext context) {
     return ListExpandableWidget(
+      ansDecoration: widget.ansDecoration ??
+          BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
+      queDecoration: widget.queDecoration ??
+          BoxDecoration(
+              color: Colors.grey[200],
+              borderRadius: const BorderRadius.all(Radius.circular(20))),
+      ansPadding: widget.ansPadding ??
+          const EdgeInsets.symmetric(horizontal: 35.0, vertical: 10),
       separator: widget.separator ?? const Divider(),
       showDivider: widget.showDivider,
       isExpanded: widget.isExpanded,
@@ -50,18 +79,12 @@ class _FAQState extends State<FAQ> {
             const TextStyle(
                 color: Colors.red, fontWeight: FontWeight.bold, fontSize: 20),
       ),
-      items: Padding(
-        padding: widget.ansPadding ??
-            const EdgeInsets.symmetric(horizontal: 35.0, vertical: 10),
-        child: Text(
-          widget.answer,
-          textAlign: TextAlign.justify,
-          style: widget.ansStyle ??
-              const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 18),
-        ),
+      items: Text(
+        widget.answer,
+        textAlign: TextAlign.justify,
+        style: widget.ansStyle ??
+            const TextStyle(
+                color: Colors.black, fontWeight: FontWeight.w500, fontSize: 18),
       ),
     );
   }
@@ -82,8 +105,9 @@ class ListExpandableWidget extends StatefulWidget {
   // optional widget for expanded Icon. Default value is `Icon(Icons.keyboard_arrow_down)`
   final Widget expandedIcon;
 
+  final EdgeInsets ansPadding;
   final bool showDivider;
-
+  final BoxDecoration ansDecoration, queDecoration;
   // optional widget for collapse Icon. Default value is `Icon(Icons.keyboard_arrow_right)`
   final Widget collapsedIcon;
   const ListExpandableWidget(
@@ -94,7 +118,10 @@ class ListExpandableWidget extends StatefulWidget {
       required this.items,
       required this.expandedIcon,
       required this.collapsedIcon,
-      required this.separator});
+      required this.separator,
+      required this.ansPadding,
+      required this.ansDecoration,
+      required this.queDecoration});
 
   @override
   State<ListExpandableWidget> createState() => _ListExpandableWidgetState();
@@ -126,10 +153,14 @@ class _ListExpandableWidgetState extends State<ListExpandableWidget> {
             )
           : widget.separator);
     }
-    children.add(ListTile(
-      title: widget.header,
-      trailing: _isExpanded! ? widget.expandedIcon : widget.collapsedIcon,
-      onTap: () => _updateExpandState(!_isExpanded!),
+    children.add(Container(
+      decoration: widget.queDecoration,
+      child: ListTile(
+        style: ListTileStyle.drawer,
+        title: widget.header,
+        trailing: _isExpanded! ? widget.expandedIcon : widget.collapsedIcon,
+        onTap: () => _updateExpandState(!_isExpanded!),
+      ),
     ));
     return Ink(
       child: Column(
@@ -141,9 +172,12 @@ class _ListExpandableWidgetState extends State<ListExpandableWidget> {
   Widget _buildListItems(BuildContext context) {
     List<Widget> titles = [];
     titles.add(_wrapHeader());
-    titles.add(widget.items);
+    titles.add(Container(
+        decoration: widget.ansDecoration,
+        padding: widget.ansPadding,
+        child: widget.items));
     return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: ListTile.divideTiles(tiles: titles, context: context).toList(),
     );
   }

@@ -1,6 +1,6 @@
 name: flutter_faq
 description: A package to display FAQs in your Flutter projects as a custom widget.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/lakshydeep-14/flutter_faq
 
 environment:
