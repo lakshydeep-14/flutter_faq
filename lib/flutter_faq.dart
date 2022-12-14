@@ -173,6 +173,7 @@ class _ListExpandableWidgetState extends State<ListExpandableWidget> {
     List<Widget> titles = [];
     titles.add(_wrapHeader());
     titles.add(Container(
+        width: double.infinity,
         decoration: widget.ansDecoration,
         padding: widget.ansPadding,
         child: widget.items));

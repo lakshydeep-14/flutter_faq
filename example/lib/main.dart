@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
               question: "Question 1",
               answer: data,
               ansDecoration: BoxDecoration(
-                  color: Colors.grey[550],
+                  color: Colors.grey[500],
                   borderRadius: const BorderRadius.all(Radius.circular(20))),
               queDecoration: BoxDecoration(
                   color: Colors.grey[500],
